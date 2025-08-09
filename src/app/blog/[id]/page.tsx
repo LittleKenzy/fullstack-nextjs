@@ -1,14 +1,27 @@
 import React from 'react'
 import style from './page.module.css'
 import Image from 'next/image'
+import { notFound } from 'next/navigation'
 
-const Blogpost = () => {
+async function getData(id : string) {
+  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+    cache: 'no-store',
+  })
+  if (!res.ok) {
+    return notFound()
+  }
+
+  return res.json()
+}
+
+const Blogpost = async ({ params }: { params: { id: string } }) => {
+  const data = await getData({ params }.params.id)
   return (
     <div className={style.container}>
       <div className={style.top}>
         <div className={style.info}>
-          <h1 className={style.title}>Lorem, ipsum dolor.</h1>
-          <p className={style.desc}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit nemo ducimus necessitatibus doloremque unde dignissimos nesciunt dolore vero ab libero. Provident libero aperiam perspiciatis repellendus nulla, quod rerum tempora atque doloremque officiis accusamus est dolor corrupti consequuntur fuga cumque consequatur.</p>
+          <h1 className={style.title}>{data.title}</h1>
+          <p className={style.desc}>{data.body}</p>
           <div className={style.author}>
             <Image
               src="https://images.unsplash.com/photo-1748279944004-f1d733dc711b?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -26,7 +39,7 @@ const Blogpost = () => {
             alt=""
             width={400}
             height={250}
-            className={style.image} 
+            className={style.image}
           />
         </div>
       </div>
