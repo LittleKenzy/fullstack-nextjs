@@ -13,7 +13,7 @@ const Portofolio = () => {
         <Link href="/portofolio/websites" className={styles.item}>
           <span className={styles.title}>Websites</span>
         </Link>
-        <Link href="/portofolio/application" className={styles.item}>
+        <Link href="/portofolio/applications" className={styles.item}>
           <span className={styles.title}>Application</span>
         </Link>
       </div>
