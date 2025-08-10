@@ -19,7 +19,4 @@ const postSchema = new Schema({
   timestamps: true
 });
 
-// Cek dulu, kalau model 'Post' sudah ada pakai itu, kalau belum buat baru
-const Post = models.Post || mongoose.model('Post', postSchema);
-
-export default Post;
+export default models.Post || mongoose.model("Post", postSchema);

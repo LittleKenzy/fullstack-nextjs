@@ -1,17 +1,18 @@
 import React from 'react'
 import styles from './page.module.css'
 import Link from 'next/link'
-import Image from 'next/image'
+import Image from 'next/image' 
 
-async function getData() {
+async function getData() { // fungsi untuk mengambil data dari API
+  // menggunakan fetch untuk mendapatkan data dari API
   const res = await fetch('https://jsonplaceholder.typicode.com/posts', {
-    cache: 'no-store',
+    cache: 'no-store', //kadang fetch tidak update, jadi kita pakai no-store
   })
   if (!res.ok) {
-    throw new Error('Network response was not ok')
+    throw new Error('Network response was not ok') // jika terjadi error pada fetch
   }
 
-  return res.json()
+  return res.json() // mengembalikan data dalam format JSON
 }
 
 const Blog = async () => {
